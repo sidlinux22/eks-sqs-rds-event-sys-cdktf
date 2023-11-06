@@ -8,6 +8,7 @@ ENV KUBECTL_VERSION=v1.28.3
 ENV HELM_VERSION=v3.13.1
 ENV CDKTF_VERSION=0.19.0
 
+
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the container
@@ -52,6 +53,14 @@ RUN curl https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz -o helm.tar
     tar -xzf helm.tar.gz && \
     mv linux-amd64/helm /usr/local/bin && \
     rm -rf helm.tar.gz linux-amd64
+
+# Install specific eksctl of Helm
+
+RUN curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Linux_amd64.tar.gz" && \
+    tar -xzf eksctl_Linux_amd64.tar.gz -C /tmp && \
+    mv /tmp/eksctl /usr/local/bin && \
+    rm eksctl_Linux_amd64.tar.gz
+
 
 # Install specific version of Taskset
 RUN curl -fsSL https://taskfile.dev/install.sh | sh

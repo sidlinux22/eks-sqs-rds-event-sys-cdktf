@@ -82,3 +82,11 @@ tasks:
     desc: Cleanup resources
     cmds:
       - task destroy-eks
+
+  run-sample-app:
+    desc: Create sample app deployment , service , ingress
+    cmds:
+      - docker exec -it event-sys-cdktf kubectl apply -f service/echoserver/echoserver-namespace.yaml
+      - docker exec -it event-sys-cdktf kubectl apply -f service/echoserver/echoserver-deployment.yaml
+      - docker exec -it event-sys-cdktf kubectl apply -f service/echoserver/echoserver-service.yaml
+      - docker exec -it event-sys-cdktf kubectl apply -f service/echoserver/echoserver-ingress.yaml
