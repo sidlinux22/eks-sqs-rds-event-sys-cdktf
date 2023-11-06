@@ -9,3 +9,4 @@ services:
     command: ["tail", "-f", "/dev/null"]
     volumes:
       - .:/app
+      - $HOME/.aws/credentials:/home/app/.aws/credentials:ro
