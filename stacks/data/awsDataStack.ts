@@ -10,7 +10,7 @@ import { DbInstance } from '@cdktf/provider-aws/lib/db-instance';
 import { SsmParameter } from '@cdktf/provider-aws/lib/ssm-parameter';
 
 // Constants and common configurations
-import { applicationName, devDbPassword } from '../common/awsContants';
+import { applicationName } from '../common/awsContants';
 
 export interface RdsStackConfig {
   domainCertArn?: string;
@@ -42,6 +42,7 @@ export class AwsDataStack extends TerraformStack {
     const nameResource = `${config.environment}-${applicationName}-${config.service}`;
     
     // Retrieve the RDS password from SSM Parameter Store
+    const devDbPassword = process.env.DEV_DB_PASSWORD;
     const rdsPassword = new SsmParameter(this, `${nameResource}-ssm-param`, {
       name: `${nameResource}-db`,
       type: 'String',
