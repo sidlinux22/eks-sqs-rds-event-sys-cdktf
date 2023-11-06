@@ -1,11 +1,17 @@
 {
   "language": "typescript",
   "app": "npx ts-node main.ts",
-  "projectId": "38eede53-0b5e-4f88-a059-ed4f9285745d",
-  "sendCrashReports": "true",
+  "projectId": "0404fe74-9b2b-4b18-91dc-135aecd8be23",
+  "sendCrashReports": "false",
   "terraformProviders": [
-    "hashicorp/aws@~>4.0"
+    "kubernetes@~> 2.7.1",
+    "aws@~> 5.0.0"
   ],
-  "terraformModules": [],
-  "context": {}
+  "terraformModules": [
+    "terraform-aws-modules/vpc/aws@ ~> 3.2.0",
+    "terraform-aws-modules/eks/aws@ ~> 17.24.0"
+  ],
+  "context": {
+
+  }
 }
