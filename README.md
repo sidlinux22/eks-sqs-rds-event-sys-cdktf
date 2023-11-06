@@ -5,7 +5,7 @@ This repository leverages Terraform's CDK for Terraform (cdktf) to manage variou
 
 ## Architecture
 
-<img src="https://raw.githubusercontent.com/sidlinux22/wordcounter-cdk/master/docs/infra_Architecture.jpeg" width="400">
+<img src="https://raw.githubusercontent.com/sidlinux22/eks-sqs-rds-event-sys-cdktf/master/docs/infra_Architecture.jpeg" width="400">
   
 
 ## Table of Contents
@@ -151,7 +151,7 @@ The CDK for Terraform (cdktf) allows us to share information between stacks. Thi
 **S3 Stack:** This stack represents the S3 backend state management. It imports the S3 bucket configuration and exports nothing.
 **Application Stack:** This stack deploys applications using Kubernetes. It imports the EKS cluster configuration and exports the application deployment configuration.
 
-
+<img src="https://raw.githubusercontent.com/sidlinux22/eks-sqs-rds-event-sys-cdktf/master/docs/tf_state.jpeg" width="400">
 
 ## Troubleshooting Issues
 
