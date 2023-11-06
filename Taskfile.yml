@@ -1,0 +1,27 @@
+version: '3'
+
+tasks:
+  cdktf-get:
+    desc: Run 'cdktf get' in the Docker container
+    cmds:
+      - docker exec event-sys-cdktf cdktf get
+
+  npm-install:
+    desc: Run 'npm install' in the Docker container
+    cmds:
+      - docker exec event-sys-cdktf npm install
+
+  cdktf-list:
+    desc: Run 'cdktf list' in the Docker container
+    cmds:
+      - docker exec event-sys-cdktf cdktf list
+
+  configure-aws-credentials:
+    desc: Run the configure_aws_credentials.sh script
+    cmds:
+      - docker exec event-sys-cdktf bash -c "chmod +x /app/local/configure_aws_credentials.sh && /app/local/configure_aws_credentials.sh"
+
+  create-s3-bucket:
+    desc: Run the create_s3_bucket.sh script
+    cmds:
+      - docker exec event-sys-cdktf bash -c "chmod +x /app/local/create_s3_bucket.sh && /app/local/create_s3_bucket.sh"
