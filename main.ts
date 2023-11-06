@@ -5,7 +5,6 @@ import { defaultRegion } from "./stacks/common/awsContants";
 import { EksClusterStackModule, KubernetesApplicationStack } from "./stacks/compute/awsEksStack";
 import { AwsSqsStack } from "./stacks/data/awsSqsStack";
 
-
 const app = new App();
 
 // 1. VPC resources and networking
@@ -51,7 +50,6 @@ const appStack = new KubernetesApplicationStack(
 );
 appStack.addDependency(cluster);
 
-
 const SqsConfig = {
   environment: "dev",
   region: defaultRegion,
@@ -59,9 +57,5 @@ const SqsConfig = {
 };
 
 new AwsSqsStack(app, "dev-sqs-stacks-ap", SqsConfig);
-
-
-
-
 
 app.synth();

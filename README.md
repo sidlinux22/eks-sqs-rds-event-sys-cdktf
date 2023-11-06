@@ -20,9 +20,13 @@ This repository leverages Terraform's CDK for Terraform (cdktf) to manage variou
   - [Usage](#usage)
   - [CDK for Terraform (cdktf) Stacks](#cdk-for-terraform-cdktf-stacks)
     - [Stack Communication](#stack-communication)
+  - [Application Deployment on EKS](#application-deployment-on-eks)
+    - [AWS Ingress Controller](#aws-ingress-controller)
+    - [Sample App: echoserver](#sample-app-echoserver)
   - [Troubleshooting Issues](#troubleshooting-issues)
     - [1. Expired Token Error](#1-expired-token-error)
     - [2. Backend Configuration Changed](#2-backend-configuration-changed)
+  - [References and Resources](#references-and-resources)
 
 
 ## Repository Structure
@@ -153,6 +157,29 @@ The CDK for Terraform (cdktf) allows us to share information between stacks. Thi
 
 <img src="https://raw.githubusercontent.com/sidlinux22/eks-sqs-rds-event-sys-cdktf/master/docs/tf_state.jpeg" width="400">
 
+
+## Application Deployment on EKS
+
+In this CDK for Terraform (cdktf) project, we deploy applications on Amazon Elastic Kubernetes Service (EKS). The application deployment is orchestrated with Kubernetes and includes the deployment of the AWS Ingress Controller to handle application traffic routing.
+
+### AWS Ingress Controller
+
+The [AWS Load Balancer Controller](https://github.com/kubernetes-sigs/aws-load-balancer-controller) is deployed as part of this project. It acts as an Ingress Controller in your EKS cluster, providing a bridge between Kubernetes services and external services. This controller manages the creation and configuration of AWS Elastic Load Balancers (ALBs) to route incoming traffic to the appropriate services within the cluster.
+
+Key features of the AWS Ingress Controller include:
+- Dynamic creation and management of ALBs based on Kubernetes Ingress resources.
+- SSL/TLS termination and certificate management for secure traffic.
+- Integration with AWS service discovery for routing to internal services.
+- Support for multiple target groups and path-based routing.
+
+### Sample App: echoserver
+
+As a part of the demonstration of ingress routing and AWS Load Balancer Controller, a sample application called "echoserver" is deployed. The echoserver is a simple application that echoes incoming HTTP requests, making it a useful tool for testing and verifying the functionality of Ingress routing.
+
+The echoserver deployment showcases how the Ingress Controller routes traffic from the ALB to the appropriate Kubernetes service, and how it handles requests and responses within the EKS cluster.
+
+This combination of the AWS Ingress Controller and the echoserver app provides a practical example of how to manage and route traffic for your applications in a Kubernetes environment on AWS EKS.
+
 ## Troubleshooting Issues
 
 ### 1. Expired Token Error
@@ -174,3 +201,15 @@ The CDK for Terraform (cdktf) allows us to share information between stacks. Thi
 - If you don't want to make any changes to the state and only need to store the current configuration, you can use `terraform init -reconfigure`.
 
 These are some common issues you may encounter while working with CDK for Terraform (cdktf) infrastructure. For specific errors or issues, consult the Terraform documentation and AWS documentation, and consider reviewing the CDK for Terraform (cdktf) project's documentation or community resources for additional troubleshooting guidance.
+
+
+## References and Resources
+
+Here are some key references and resources that you may find helpful for understanding and working with this CDK for Terraform (cdktf) project:
+
+- [terraform-aws-eks](https://github.com/terraform-aws-modules/terraform-aws-eks)
+- [CDK for Terraform (cdktf) Documentation](https://developer.hashicorp.com/terraform/cdktf)
+- [Terraform Backend Configuration](https://developer.hashicorp.com/terraform/language/settings/backends/s3)
+- [CDK for Terraform (cdktf) Stacks](https://developer.hashicorp.com/terraform/cdktf/concepts/stacks)
+- [AWS Load Balancer Controller Documentation](https://kubernetes-sigs.github.io/aws-load-balancer-controller/v1.1/guide/walkthrough/echoserver/)
+- [AWS Load Balancer Controller Helm Chart](https://artifacthub.io/packages/helm/aws/aws-load-balancer-controller)
