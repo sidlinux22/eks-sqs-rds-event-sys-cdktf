@@ -16,12 +16,69 @@ tasks:
     cmds:
       - docker exec event-sys-cdktf cdktf list
 
-  configure-aws-credentials:
-    desc: Run the configure_aws_credentials.sh script
+  deploy-network:
+    desc: Deploy the network stack
     cmds:
-      - docker exec event-sys-cdktf bash -c "chmod +x /app/local/configure_aws_credentials.sh && /app/local/configure_aws_credentials.sh"
+      - docker exec -it event-sys-cdktf cdktf deploy dev-network-stacks-ap
+
+  deploy-db:
+    desc: Deploy the database stack
+    cmds:
+      - docker exec -it event-sys-cdktf cdktf deploy dev-data-db-stacks-ap
+
+  deploy-eks:
+    desc: Deploy the EKS stack
+    cmds:
+      - docker exec -it event-sys-cdktf cdktf deploy dev-eks-stacks-ap dev-k8s-ap
+
+  deploy-sqs:
+    desc: Deploy the SQS stack
+    cmds:
+      - docker exec -it event-sys-cdktf cdktf deploy dev-sqs-stacks-ap
+
+  configure-aws-credentials:
+    desc: Configure AWS credentials for Kubernetes
+    cmds:
+      - sh local/aws-scripts/configure_aws_credentials.sh
+      - docker-compose down
+      - docker-compose up -d
+
+  configure-k8s-credentials:
+    desc: Configure AWS credentials for Kubernetes
+    cmds:
+      - docker exec event-sys-cdktf aws eks update-kubeconfig --region ap-northeast-1 --name dev-eks-cluster
 
   create-s3-bucket:
-    desc: Run the create_s3_bucket.sh script
+    desc: Create an S3 bucket
     cmds:
-      - docker exec event-sys-cdktf bash -c "chmod +x /app/local/create_s3_bucket.sh && /app/local/create_s3_bucket.sh"
+      - docker exec event-sys-cdktf bash -c "chmod +x local/aws-scripts/create_s3_bucket.sh && local/aws-scripts/create_s3_bucket.sh"
+
+  setup-ingress-controller:
+    desc: Setup AWS Load Balancer Controller
+    cmds:
+      - docker exec -it event-sys-cdktf bash service/setup_ingress_controller.sh
+
+  run-all-stacks:
+    desc: Run all CDKTerraform stacks
+    cmds:
+      - task configure-aws-credentials
+      - task cdktf-get
+      - task npm-install
+      - task create-s3-bucket
+      - task cdktf-list
+      - task deploy-network
+      - task deploy-db
+      - task deploy-eks
+      - task deploy-sqs
+      - task configure-k8s-credentials
+      - task setup-ingress-controller
+
+  destroy-eks:
+    desc: Create an S3 bucket
+    cmds:
+      - docker exec -it event-sys-cdktf cdktf destroy dev-eks-stacks-ap dev-k8s-ap
+      
+  run-all-cleanup:
+    desc: Cleanup resources
+    cmds:
+      - task destroy-eks
