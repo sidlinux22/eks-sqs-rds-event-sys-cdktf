@@ -14,7 +14,7 @@ import { applicationName } from '../common/awsContants';
 
 // Define the configuration for the network stack
 export interface NetworkStackConfig {
-  environment: 'dev' | 'stg';
+  environment: string;
   appName?: string;
   region: string;
   service: string;
@@ -38,7 +38,7 @@ export class AwsNetworkStack extends TerraformStack {
     // Set up remote state storage with S3 backend
     new S3Backend(this, {
       bucket: `${config.environment}-event-sys-tfstate`,
-      key: "cdktf",
+      key: "awsNetworkStack-cdktf",
       region: config.region,
     });
 
