@@ -1,5 +1,5 @@
 {
-  "name": "eks-sns-rds-event-sys-cdktf",
+  "name": "eks-sqs-rds-event-sys-cdktf",
   "version": "1.0.0",
   "main": "main.js",
   "types": "main.ts",

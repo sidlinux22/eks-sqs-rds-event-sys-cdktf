@@ -37,7 +37,7 @@ tasks:
       - docker exec -it event-sys-cdktf cdktf deploy dev-sqs-stacks-ap
 
   configure-aws-credentials:
-    desc: Configure AWS credentials for Kubernetes
+    desc: Configure AWS credentials
     cmds:
       - sh local/aws-scripts/configure_aws_credentials.sh
       - docker-compose down
@@ -56,7 +56,7 @@ tasks:
   setup-ingress-controller:
     desc: Setup AWS Load Balancer Controller
     cmds:
-      - docker exec -it event-sys-cdktf bash service/setup_ingress_controller.sh
+      - docker exec -it event-sys-cdktf bash service/ingress-controller/setup_ingress_controller.sh
 
   run-all-stacks:
     desc: Run all CDKTerraform stacks
