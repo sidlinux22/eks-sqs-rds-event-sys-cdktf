@@ -1,17 +1,17 @@
 
 # eks-sqs-rds-event-sys-cdktf
 
-  
-
-  
-
 This repository leverages Terraform's CDK for Terraform (cdktf) to manage various AWS resources, including an EKS cluster, RDS database, SQS queues, and more. It also includes a configuration for an Ingress Controller and a sample app deployment on the EKS cluster.
 
+## Architecture
+
+<img src="https://raw.githubusercontent.com/sidlinux22/wordcounter-cdk/master/docs/infra_Architecture.jpeg" width="400">
   
 
 ## Table of Contents
 
 - [eks-sqs-rds-event-sys-cdktf](#eks-sqs-rds-event-sys-cdktf)
+  - [Architecture](#architecture)
   - [Table of Contents](#table-of-contents)
   - [Repository Structure](#repository-structure)
     - [Prerequisites](#prerequisites)
@@ -20,7 +20,7 @@ This repository leverages Terraform's CDK for Terraform (cdktf) to manage variou
   - [Usage](#usage)
   - [CDK for Terraform (cdktf) Stacks](#cdk-for-terraform-cdktf-stacks)
     - [Stack Communication](#stack-communication)
-  - [Troubleshooting CDK for Terraform (cdktf) Issues](#troubleshooting-cdk-for-terraform-cdktf-issues)
+  - [Troubleshooting Issues](#troubleshooting-issues)
     - [1. Expired Token Error](#1-expired-token-error)
     - [2. Backend Configuration Changed](#2-backend-configuration-changed)
 
@@ -153,7 +153,7 @@ The CDK for Terraform (cdktf) allows us to share information between stacks. Thi
 
 
 
-## Troubleshooting CDK for Terraform (cdktf) Issues
+## Troubleshooting Issues
 
 ### 1. Expired Token Error
 
